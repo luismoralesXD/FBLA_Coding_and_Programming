@@ -35,7 +35,7 @@ def checkedout_books(request):
     today = date.today()
     todays_date = int(str(today.year)+str(today.month).zfill(2)+str(today.day).zfill(2))
     books_out = Book.objects.filter(available=False).order_by('due_date')
-    return render(request, 'checkedout.html', {'books_out': books_out, 'today': today})
+    return render(request, 'checkedout.html', {'books_out': books_out, 'today': todays_date})
 
 def due_today(request):
     today = date.today()
