@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+      <div class="space"></div>
+      <div id="CRUD">
+        <div id="CRUD-search">
+          <form method="GET" action="">
+            <input id="search-field" type="text" name="q" placeholder="Search Users" value="{{request.GET.q}}"/>
+            <input id="submit" type="submit" value="Search" />
+          </form>
+        </div>
+        <div id="CRUD-body">{% for user in list %}
+          <a style="width: 320px;" href="{% url 'checkout-user' pk=user.pk %}">
+            <div class="user-list">
+              <div class="icon"><i class="fas fa-user-circle"></i></div>
+              <div class="user-basic-info">{% if user.status == "Staff" %}
+                <h4>{{user.first_name}} {{user.last_name}}(Staff)</h4>{% else %}
+                <h4>{{user.first_name}} {{user.last_name}}</h4>{% endif %}
+                <h5>{{user.id_number}}</h5>
+              </div>
+            </div>
+          </a>{% endfor %}
+        </div>
+  
+        <div class="space"></div>
+        <div style="text-align: center;" class="pagination">
+          <span class="page-links">{% if list.has_previous %}
+            <a style="color:black" href="?{{page_var}}={{list.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Previous</a>{% endif %}
+            <span class="Current">
+              | Page {{list.number}} of {{list.paginator.num_pages}} |
+            </span> {% if list.has_next %}<a style="color:black" href="?{{page_var}}={{list.next_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Next</a>{% endif %}
+          </span>
+        </div>
+        <div class="space"></div>
+  
+      </div>    
+{% endblock content %}

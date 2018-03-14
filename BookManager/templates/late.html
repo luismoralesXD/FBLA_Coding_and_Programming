@@ -1,0 +1,23 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="space"></div>
+<div class="book-card">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Id</th>
+            <th>Book Out</th>
+            <th>Price</th>
+        </tr>
+        {% for item in books_out %}
+        <tr></tr>
+        <tr>
+            <td>{{item.holder.first_name}} {{item.holder.last_name}} {% if item.holder.status == "Staff" %}(Staff){% endif %}</td>
+            <td>{{item.holder.id_number}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.price}}</td>
+        </tr>
+        <tr></tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}

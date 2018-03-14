@@ -1,0 +1,115 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--  Meta  -->
+  <meta charset="UTF-8" />
+
+  <!--  Styles  -->
+  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/CRUD.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/assets/webfonts/fontawesome-all.css' %}">
+</head>
+<body>
+  <div id="side">
+    <div class="menu-item">
+      <a href="{% url 'home' %}">
+        <div class="space">
+        </div>
+        <i class="fas fa-home"></i>
+        <p>Home</p>
+        <div class="space">
+        </div>
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="{% url 'users' %}">
+        <div class="space">
+        </div>
+        <i class="fas fa-user-circle"></i>
+        <p>Users</p>
+        <div class="space">
+        </div>
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="{% url 'booksearch' %}">
+        <div class="space">
+        </div>
+        <i class="fas fa-book"></i>
+        <p>Books</p>
+        <div class="space">
+        </div>
+      </a>
+    </div>
+    <div class="menu-item">
+      <a href="{% url 'checkout' %}">
+        <div class="space">
+        </div>
+        <i class="fas fa-sign-out-alt"></i>
+        <p>Checkout</p>
+        <div class="space">
+        </div>
+      </a>
+    </div>
+    <div class="active">
+        <div class="space">
+        </div>
+        <i class="fas fa-sign-in-alt"></i>
+        <p>Check-In</p>
+        <div class="space">
+        </div>
+    </div>
+  </div>
+
+  <div id="content">
+    <div id="checkin-options">
+        <a class="checkin-type" href="{% url 'checkin' %}">Single Book</a>
+        <a id="type" class="checkin-type">Individual</a>
+    </div>
+    <div id="CRUD">
+      <div id="CRUD-search">
+        <form method="GET" action="">
+          <h3>Books Checked out to {{user.full_name}}(ID: {{user.id_number}}){% if user.status == "Staff" %}(Staff){%endif%}</h3>
+          <h4>{{user.books_out}} of {{user.books_allowed}} Books Checked Out</h4>
+          <div class="space"></div>
+          <input id="search-field" type="text" name="q" placeholder="Search Checked out Books" value="{{request.GET.q}}" />
+          <input id="submit" type="submit" value="Search" />
+        </form>
+        <form method="POST" action=""> {% csrf_token %}
+          <input type="text" name="all" value="all" style="display: none" >
+          <input onclick="return confirm('Check-in all books for {{user.full_name}}?')" style="width: 200px;" type="submit" id="submit" value="Turn in all books">
+        </form>
+      </div>
+      <div id="CRUD-body">{% for book_out in books %}
+        <a>
+          <div class="book-cards">
+            <div class="color-holder" style="background-color: rgb({{book_out.r}},{{book_out.g}},{{book_out.b}})">
+            </div>
+            <div class="info">
+              <h4>{{book_out.title}}</h4>
+              <h5>{{book_out.author}}</h5>
+              <h5>Due: {% with date=book_out.due_date|slugify %}{{date|slice:"4:6"}}/{{date|slice:"6:8"}}/{{date|slice:":4"}}{% endwith %}</h5>
+              <form method="POST" action="">{% csrf_token %}
+                <input class="hidden-id" name="book_pk" type="text" value="{{book_out.pk}}">
+                <input onclick="return confirm('Turn in {{book_out.title}} for user {{user.full_name}}?')" type="submit" value="Check-In" class="checkin" >
+              </form>
+            </div>
+          </div>
+        </a>{% endfor %}
+        
+      </div>
+      <div class="space"></div>
+      <div style="text-align: center;" class="pagination">
+        <span class="page-links">{% if list.has_previous %}
+          <a style="color:black" href="?{{page_var}}={{books.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Previous</a>{% endif %}
+        <span class="Current">
+          | Page {{books.number}} of {{books.paginator.num_pages}} |
+        </span> {% if books.has_next %}<a style="color:black" href="?{{page_var}}={{books.next_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Next</a>{% endif %}
+        </span>
+      </div>
+      <div class="space"></div>
+    </div>
+  </div>
+  <!-- Scripts -->
+</body>
+</html>

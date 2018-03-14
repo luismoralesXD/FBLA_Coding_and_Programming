@@ -1,0 +1,34 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+            <div class="space">
+            </div>
+            <div id="CRUD">
+                <div id="CRUD-search">
+                    <form method="GET" action="">
+                        <input id="search-field" type="text" name="q" placeholder="Search Books" value="{{request.GET.q}}" />
+                        <input id="submit" type="submit" value="Search" />
+                    </form>
+                </div>
+                <div id="CRUD-body">{% for book in list %}
+                    <a href="{% url 'bookinfo' pk=book.pk %}">
+                        <div class="book-cards">
+                            <div class="color-holder" style="background-color: rgb({{book.r}},{{book.g}},{{book.b}})">
+                            </div>
+                            <div class="info">
+                                <h4>{{book.title}}</h4>
+                                <h5>{{book.author}}</h5>
+                            </div>
+                        </div>
+                    </a>{% endfor %}
+                </div>
+                <div class="space"></div>
+                <div style="text-align: center;" class="pagination">
+                    <span class="page-links">{% if list.has_previous %}
+                        <a style="color:black" href="?{{page_var}}={{list.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Previous</a>{% endif %}
+                        <span class="Current">
+                            | Page {{list.number}} of {{list.paginator.num_pages}} |
+                        </span> {% if list.has_next %}<a style="color:black" href="?{{page_var}}={{list.next_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Next</a>{% endif %}
+                    </span>
+                </div>
+                <div class="space"></div>
+            </div>
+{% endblock content %}

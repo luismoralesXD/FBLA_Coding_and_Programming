@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--  Meta  -->
+    <meta charset="UTF-8" />
+
+    <!--  Styles  -->
+    <link rel="stylesheet" href="{% static 'css/book-info.css' %}">
+    <link rel="stylesheet" href="{% static 'css/register_book.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/CRUD.css' %}">
+    <link rel="stylesheet" href="{% static 'css/assets/webfonts/fontawesome-all.css' %}">
+</head>
+
+<body>
+    <div id="side">{% if not Home %}
+        <div class="menu-item">
+            <a href="{% url 'home' %}">{% else %}
+        <div class="active">{% endif %}
+                <div class="space">
+                </div>
+                <i class="fas fa-home"></i>
+                <p>Home</p>
+                <div class="space">
+                </div>{% if not Home %}
+            </a>{% endif %}
+        </div>{% if not UserSearch %}
+        <div class="menu-item">
+            <a href="{% url 'users' %}">{% else %}
+        <div class="active">{% endif %}
+                <div class="space">
+                </div>
+                <i class="fas fa-user-circle"></i>
+                <p>Users</p>
+                <div class="space">
+                </div>{% if not UserSearch %}
+            </a>{% endif %}
+        </div>{% if not BookSearch %}
+        <div class="menu-item">
+            <a href="{% url 'booksearch' %}">{% else %}
+        <div class="active">{% endif %}
+                <div class="space">
+                </div>
+                <i class="fas fa-book"></i>
+                <p>Books</p>
+                <div class="space">
+                </div>{% if not BookSearch %}
+            </a>{% endif %}
+        </div>{% if not Checkout %}
+        <div class="menu-item">
+            <a href="{% url 'checkout' %}">{% else %}
+        <div class="active">{% endif %}
+                <div class="space">
+                </div>
+                <i class="fas fa-sign-out-alt"></i>
+                <p>Checkout</p>
+                <div class="space">
+                </div>{% if not Checkout %}
+            </a>{% endif %}
+        </div>{% if not Checkin %}
+        <div class="menu-item">
+            <a href="{% url 'checkin' %}">{% else %}
+        <div class="active">{% endif %}
+                <div class="space">
+                </div>
+                <i class="fas fa-sign-in-alt"></i>
+                <p>Checkin</p>
+                <div class="space">
+                </div>{% if not Checkin %}
+            </a>{% endif %}
+        </div>
+    </div>
+
+    <div id="content">
+        {% block content %} {% endblock content %}
+    </div>
+    <!-- Scripts -->
+</body>
+
+</html>

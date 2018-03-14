@@ -1,0 +1,38 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div style="height: 50px" class="space"></div>
+    <div id="CRUD-info">
+      <div class="options-top">{% if user.books_out < 1 %}
+        <a class="user-options" href="{% url 'delete-user' pk=user.pk %}" onclick="return confirm('Are you sure you want to delete this profile?')" ><i class="fas fa-trash-alt"></i></a>{% endif %}
+        <a class="user-options" href="{% url 'edituser' pk=user.pk%}" onclick="return confirm('Are you sure you want to perform and update for this profile?')" ><i class="far fa-edit user-holder"></i></a>
+      </div>
+      <div id="user-holder">
+        <i class="fas fa-user-circle"></i>
+      </div>
+      <div class="detailed-info">
+        <ul>
+          <li>Name: {{user.full_name}}</li>
+          <li>ID Number: {{user.id_number}}</li>
+          <li>Type: {{user.status}}</li>
+          <li>Days Given Per Book: {{user.day_limit}}</li>
+            <li>Books: {{user.books_out}} out of {{user.books_allowed}} allowed</li>
+        </ul>
+      </div>
+    </div>
+    <div id="CRUD"> {% if user.books_out > 0 %}
+        <div id="CRUD-body">{% for book in books %}
+            <a href="{% url 'bookinfo' pk=book.pk %}">
+                <div class="book-cards">
+                    <div class="color-holder" style="background-color: rgb({{book.r}},{{book.g}},{{book.b}})">
+                    </div>
+                    <div class="info">
+                        <h4>{{book.title}}</h4>
+                        <h5>{{book.author}}</h5>
+                        <h5>Due: {% with date=book.due_date|slugify %}{{date|slice:"4:6"}}/{{date|slice:"6:8"}}/{{date|slice:":4"}}{% endwith %}</h5>
+                    </div>
+                </div>
+            </a>{% endfor %}
+        </div>
+    </div>{% endif %}
+  <div class="space"></div>
+  <div class="space"></div>
+{% endblock content %}

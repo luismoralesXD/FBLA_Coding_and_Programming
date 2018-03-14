@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+        <div class="space">
+        </div>
+        <div class="home-info">
+            <div class="top">
+                <p>Information</p>
+            </div>
+            <div class="body">
+                <ul>
+                    {% if today > 0 %}
+                    <a href="{% url 'duetoday' %}" style="text-align: left;">
+                        <li>There are {{today}} books due today.</li>
+                    </a>
+                    {% else %}
+                    <li>There are {{today}} books due today.</li>
+                    {% endif %} {% if out > 0 %}
+                    <a href="{% url 'checked_out' %}" style="text-align: left;">
+                        <li>There are {{out}} books checked out.</li>
+                    </a>
+                    {% else %}
+                    <li>There are {{today}} books due today.</li>
+                    {% endif %} {% if late > 0 %}
+                    <a href="{% url 'overdue' %}" style="text-align: left">
+                        <li>There are {{late}} books overdue.</li>
+                    </a>
+                    {% else %}
+                    <li>There are {{late}} books overdue.</li>
+                    {% endif %}
+                    <li>There are {{person}} student and staff members in the database.</li>
+                    <li>There are {{book.count}} books registered.</li>
+                    <li id="last"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="space">
+        </div>
+        <div class="double-window">
+            <div class="left-window">
+                <div class="top">
+                    <p>Books</p>
+                </div>
+                <div class="body">
+                    <ul>
+                        <a href="{% url 'registerbook' %}">
+                            <li><i class="fas fa-plus"> Register book</i></li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="right-window">
+                <div class="top">
+                    <p>Users</p>
+                </div>
+                <div class="body">
+                    <ul>
+                        <a href="{% url 'newperson' %}">
+                            <li><i class="fas fa-plus"> Register Person</i></li>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+{% endblock content %}

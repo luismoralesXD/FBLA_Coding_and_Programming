@@ -1,0 +1,11 @@
+bin/
+Include/
+include/
+lib/
+Lib/
+Scripts/
+Tcl/
+__pycache__/
+dist/
+build/
+BookManager/.vscode/settings.json

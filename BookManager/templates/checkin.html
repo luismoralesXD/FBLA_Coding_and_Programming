@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+    <div id="checkin-options">
+      <a id="type" class="checkin-type">Single Book</a>
+      <a class="checkin-type" href="{% url 'checkin-user-search' %}">Individual</a>
+    </div>
+    <div id="CRUD">
+      <div id="CRUD-search">
+        <form method="GET" action="">
+          <input id="search-field" type="text" name="q" placeholder="Search Checked-out Books" value="{{request.GET.q}}" />
+          <input id="submit" type="submit" value="Search" />
+        </form>
+      </div>
+      <div id="CRUD-body">{% for book_out in books_out %}
+        <a>
+          <div class="book-cards">
+            <div class="color-holder" style="background-color: rgb({{book_out.r}},{{book_out.g}},{{book_out.b}})">
+            </div>
+            <div class="info">
+              <h4>{{book_out.title}}</h4>
+              <h5>{{book_out.author}}</h5>
+              <h5>Holder: {{book_out.holder.full_name}}</h5>
+              <h5>Due: {% with date=book_out.due_date|slugify %}{{date|slice:"4:6"}}/{{date|slice:"6:8"}}/{{date|slice:":4"}}{% endwith %}</h5>
+              <form method="POST" action="">{% csrf_token %}
+                <input class="hidden-id" name="book_pk" type="text" value="{{book_out.pk}}">
+                <input onclick="return confirm('Turn in {{book_out.title}} for user {{book_out.holder.full_name}}?')" type="submit" value="Check-In" class="checkin" >
+              </form>
+            </div>
+          </div>
+        </a>{% endfor %}
+        
+      </div>
+      <div class="space"></div>
+      <div style="text-align: center;" class="pagination">
+        <span class="page-links">{% if list.has_previous %}
+          <a style="color:black" href="?{{page_var}}={{books_out.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Previous</a>{% endif %}
+        <span class="Current">
+          | Page {{books_out.number}} of {{books_out.paginator.num_pages}} |
+        </span> {% if list.has_next %}<a style="color:black" href="?{{page_var}}={{books_out.next_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Next</a>{% endif %}
+        </span>
+      </div>
+      <div class="space"></div>
+    </div>
+{% endblock content %}

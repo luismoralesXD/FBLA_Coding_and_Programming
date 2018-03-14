@@ -1,0 +1,120 @@
+#CRUD {
+    width: 740px;
+    margin: auto;
+}
+
+#CRUD-search {
+    text-align: center;
+    background-color: white;
+    margin-bottom: 20px;
+    box-shadow: 0px 10px 20px #d4d4d4;
+}
+
+#CRUD-search form {
+    padding: 10px;
+}
+
+#search-field {
+    height: 30px;
+    width: 550px;
+}
+
+#submit {
+    background-color: #262846;
+    color: white;
+    width: 70px;
+    height: 34px;
+    border: none;
+    box-shadow: none;
+}
+
+#CRUD-body {
+    position: relative;
+    text-align: center;
+}
+
+#CRUD-body a {
+    color: black;
+    margin: 10px;
+    display: inline-block;
+    width: 200px;
+}
+
+.book-cards {
+    width: 200px;
+    background-color: #fff;
+    box-shadow: 0px 10px 20px #d4d4d4;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    border-radius: 10px;
+}
+
+.color-holder {
+    height: 200px;
+    width: 180px;
+    margin: 10px;
+    margin-top: 0px;
+    border-radius: 5px;
+}
+
+.info {
+    width: 180px;
+    margin: auto;
+}
+
+.info h4 {
+    height: 38px;
+    overflow: hidden;
+}
+
+.info h5 {
+    height: 15px;
+    overflow: hidden;
+}
+.user-list {
+  width: 320px;
+  background-color: white;
+  box-shadow: 0px 10px 20px #d4d4d4;
+  display: inline-block;
+}
+.icon {
+  width: 35px;
+  float: left;
+  padding: 10px;
+}
+.user-basic-info {
+  text-align: left;
+  padding-top: 5px;
+}
+.checkin {
+    border:none;
+    box-shadow:none;
+    width: 95%;
+    padding: 5px 0px 5px 0px;
+    background-color: #262846;
+    color: white;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  #checkin-options {
+    padding: 20px;
+    text-align: center;
+  }
+  .checkin-type {
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px #d4d4d4;
+    padding: 10px;
+    margin: 50px;
+  }
+  #type {
+    background-color: #262846;
+    color: white;
+  }
+  #submit:hover, .checkin:hover {
+    background-color: #3b3d58;
+  }
+  .hidden-id {
+    display: none;
+  }

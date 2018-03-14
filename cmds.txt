@@ -1,0 +1,22 @@
+ build virtualenv
+Windows
+  python -m virtualenv .
+Ubuntu
+  python3 -m virtualenv .
+
+activate virtualenv
+Windows
+  .\Scripts\activate
+  
+Ubuntu
+  source bin/activate
+  
+  
+install requirements
+  pip install -r requirements.txt
+
+build app
+  pyinstaller (options) app_name.py
+    (options) = --onefile -> builds single file otherwise whole package with multiple files
+		--windowed -> launched app as window without command prompt in background
+		--icon=app_icon.ico -> sets icon for app

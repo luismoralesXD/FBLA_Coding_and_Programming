@@ -1,0 +1,7 @@
+django==1.8.18
+cherrypy
+pywebview
+pyinstaller
+paste
+httplib2
+pythonnet
