@@ -81,10 +81,10 @@ def checkin_user_books(request, pk):
     except PageNotAnInteger:
         queryset = paginator.page(1)
 
-    book_id = request.POST.get('book_id')
+    book_pk = request.POST.get('book_pk')
     checkin_all = request.POST.get('all')
-    if book_id:
-        book = Book.objects.get(id=book_id)
+    if book_pk:
+        book = Book.objects.get(id=book_pk)
         user.books_out = user.books_out - 1
         book.available = True
         book.due_date = None
