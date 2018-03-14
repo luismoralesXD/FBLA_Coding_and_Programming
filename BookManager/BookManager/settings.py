@@ -25,7 +25,7 @@ SECRET_KEY = '4@21*160x3lt^p7c1b^z1to&1&#=fpa(q@nmgq-70msnj!_he*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'http://127.0.0.1']
 
 
 # Application definition
@@ -113,7 +113,7 @@ STATICFILES_FINDERS = [
 
 STATICFILES_DIRS = [
     os.path.join(dir_path, 'static\\admin'),
-    os.path.join(BASE_DIR, 'static'),
+    # os.path.join(BASE_DIR, 'static'),
 ]
 
 STATIC_ROOT = os.path.join(dir_path, 'static')

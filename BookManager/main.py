@@ -9,6 +9,7 @@ from logging import handlers
 from django.conf import settings
 from django.core.handlers.wsgi import WSGIHandler
 from time import sleep
+from django.core.mail.backends import *
 
 logger = logging.getLogger("BookManager.log")
 
