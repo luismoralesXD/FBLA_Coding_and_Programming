@@ -17,7 +17,8 @@ To Download the program,
 13. If you have a preferred destination, proceed to extract it there otherwise hit extract
 14. A folder should open once it is done
 15. There will be a file called `BookManager.exe - Shortcut` this file can be placed on the Desktop to access the application
-16. Proceed to double click it and the app will open, it might take a while
+16. Proceed to double click it and the app will open
+17. If a warning message pops up, click more info and once clicked, it will give you an option to open the app or run it
 
 To Use the application:
 
