@@ -103,7 +103,8 @@ if __name__ == "__main__":
     handler.setFormatter(fmt)
     log.addHandler(handler)
 
-# Django settings  os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'BookManager.settings')
+    # Django settings
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'BookManager.settings')
     os.environ["DJANGO_SETTINGS_MODULE"] = "BookManager.settings"
     django.setup()
     DjangoApplication().run()
