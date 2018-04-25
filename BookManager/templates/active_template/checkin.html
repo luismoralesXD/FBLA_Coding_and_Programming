@@ -1,16 +1,16 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'active_template/base.html' %} {% load static %} {% block content %}
     <div id="checkin-options">
       <a id="type" class="checkin-type">Single Book</a>
       <a class="checkin-type" href="{% url 'checkin-user-search' %}">Individual</a>
     </div>
     <div id="CRUD">
       <div id="CRUD-search">
-        <form method="GET" action="">
+        <form method="GET" action=""> <!--search box-->
           <input id="search-field" type="text" name="q" placeholder="Search Checked-out Books" value="{{request.GET.q}}" />
           <input id="submit" type="submit" value="Search" />
         </form>
       </div>
-      <div id="CRUD-body">{% for book_out in books_out %}
+      <div id="CRUD-body">{% for book_out in books_out %}  <!--loop through books checked out-->
         <a>
           <div class="book-cards">
             <div class="color-holder" style="background-color: rgb({{book_out.r}},{{book_out.g}},{{book_out.b}})">
@@ -19,9 +19,10 @@
               <h4>{{book_out.title}}</h4>
               <h5>{{book_out.author}}</h5>
               <h5>Holder: {{book_out.holder.full_name}}</h5>
+              <h5>Call ID: {{book_out.call_id}}</h5>
               <h5>Due: {% with date=book_out.due_date|slugify %}{{date|slice:"4:6"}}/{{date|slice:"6:8"}}/{{date|slice:":4"}}{% endwith %}</h5>
-              <form method="POST" action="">{% csrf_token %}
-                <input class="hidden-id" name="book_pk" type="text" value="{{book_out.pk}}">
+              <form method="POST" action="">{% csrf_token %}  <!--checkin form-->
+                <input class="hidden-id" name="book_pk" type="text" value="{{book_out.pk}}"> <!--hide input box with book pk-->
                 <input onclick="return confirm('Turn in {{book_out.title}} for user {{book_out.holder.full_name}}?')" type="submit" value="Check-In" class="checkin" >
               </form>
             </div>
@@ -30,8 +31,9 @@
         
       </div>
       <div class="space"></div>
-      <div style="text-align: center;" class="pagination">
+      <div style="text-align: center;" class="pagination"> <!--displays page # of total pages and next/previous if available-->
         <span class="page-links">{% if list.has_previous %}
+          <!--link passes search term to next page for search box to display the search term-->
           <a style="color:black" href="?{{page_var}}={{books_out.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Previous</a>{% endif %}
         <span class="Current">
           | Page {{books_out.number}} of {{books_out.paginator.num_pages}} |

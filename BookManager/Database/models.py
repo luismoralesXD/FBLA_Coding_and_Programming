@@ -42,9 +42,9 @@ class Book(models.Model):
             time = str(datetime.now().time())
             time = str((int(time[:2]) * 60 * 60) + (int(time[3:5]) * 60) + int(time[6:8])).zfill(5)
             book_id = (a_first + t_first + year + time + day)
-            self.r = randint(10, 255)
-            self.g = randint(10, 255)
-            self.b = randint(10, 255)
+            self.r = randint(0, 255)
+            self.g = randint(0, 255)
+            self.b = randint(0, 255)
             self.call_id = book_id
         # will add a due date
         elif self.id and self.checking_out:
@@ -88,4 +88,3 @@ class Person(models.Model):
         self.last_name = ' '.join(word[0].upper() + word[1:] for word in self.last_name.split())
         self.full_name = self.first_name + " " + self.last_name
         super(Person, self).save()
-

@@ -1,0 +1,25 @@
+{% extends 'active_template/base.html' %} {% load static %} {% block content %}
+<div style="height:35px;padding:10px 10px 10px 0px;">
+    <button style="background-color: #262846;color: white;width: 70px;height: 34px;border:none;box-shadow:none;" onclick="window.print()">Print</button>
+</div>
+<div class="book-card">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Id</th>
+            <th>Book Out</th>
+        </tr>
+        {% for item in due %}
+        <!--loops through books with due date that of today-->
+        <tr>
+            <!--display user's full name-->
+            <td>{{item.holder.first_name}} {{item.holder.last_name}} {% if item.holder.status == "Staff" %}(Staff){% endif %}</td>
+            <!--display the user's ID-->
+            <td>{{item.holder.id_number}}</td>
+            <!--display the book title-->
+            <td>{{item.title}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock content %}

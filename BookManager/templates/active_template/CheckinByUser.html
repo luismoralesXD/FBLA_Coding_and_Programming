@@ -5,9 +5,9 @@
   <meta charset="UTF-8" />
 
   <!--  Styles  -->
-  <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
-  <link rel="stylesheet" href="{% static 'css/CRUD.css' %}">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/assets/webfonts/fontawesome-all.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/default_css/main.css' %}">
+  <link rel="stylesheet" href="{% static 'css/default_css/CRUD.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/default_css/assets/webfonts/fontawesome-all.css' %}">
 </head>
 <body>
   <div id="side">
@@ -68,19 +68,19 @@
     </div>
     <div id="CRUD">
       <div id="CRUD-search">
-        <form method="GET" action="">
+        <form method="GET" action=""> <!--search box for books out to x user-->
           <h3>Books Checked out to {{user.full_name}}(ID: {{user.id_number}}){% if user.status == "Staff" %}(Staff){%endif%}</h3>
           <h4>{{user.books_out}} of {{user.books_allowed}} Books Checked Out</h4>
           <div class="space"></div>
           <input id="search-field" type="text" name="q" placeholder="Search Checked out Books" value="{{request.GET.q}}" />
           <input id="submit" type="submit" value="Search" />
         </form>
-        <form method="POST" action=""> {% csrf_token %}
+        <form method="POST" action=""> {% csrf_token %} <!--form to submit all books-->
           <input type="text" name="all" value="all" style="display: none" >
           <input onclick="return confirm('Check-in all books for {{user.full_name}}?')" style="width: 200px;" type="submit" id="submit" value="Turn in all books">
         </form>
       </div>
-      <div id="CRUD-body">{% for book_out in books %}
+      <div id="CRUD-body">{% for book_out in books %} <!--loop to display all books for user-->
         <a>
           <div class="book-cards">
             <div class="color-holder" style="background-color: rgb({{book_out.r}},{{book_out.g}},{{book_out.b}})">
@@ -88,8 +88,9 @@
             <div class="info">
               <h4>{{book_out.title}}</h4>
               <h5>{{book_out.author}}</h5>
+              <h5>Call ID: {{book_out.call_id}}</h5>
               <h5>Due: {% with date=book_out.due_date|slugify %}{{date|slice:"4:6"}}/{{date|slice:"6:8"}}/{{date|slice:":4"}}{% endwith %}</h5>
-              <form method="POST" action="">{% csrf_token %}
+              <form method="POST" action="">{% csrf_token %} <!--POST form to submit single book-->
                 <input class="hidden-id" name="book_pk" type="text" value="{{book_out.pk}}">
                 <input onclick="return confirm('Turn in {{book_out.title}} for user {{user.full_name}}?')" type="submit" value="Check-In" class="checkin" >
               </form>
@@ -99,8 +100,9 @@
         
       </div>
       <div class="space"></div>
-      <div style="text-align: center;" class="pagination">
+      <div style="text-align: center;" class="pagination"><!--shows page of pages with next/previous option if available-->
         <span class="page-links">{% if list.has_previous %}
+          <!--passes search term to next page if there is one-->
           <a style="color:black" href="?{{page_var}}={{books.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Previous</a>{% endif %}
         <span class="Current">
           | Page {{books.number}} of {{books.paginator.num_pages}} |

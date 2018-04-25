@@ -13,7 +13,6 @@ from django.core.mail.backends import *
 
 logger = logging.getLogger("BookManager.log")
 
-
 class DjangoApplication(object):
     HOST = "127.0.0.1"
     PORT = 9090

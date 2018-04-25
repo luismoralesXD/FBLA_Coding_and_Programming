@@ -33,7 +33,7 @@ def user_search(request):
         "list": queryset,
         "page_var": page_var
     }
-    return render(request, 'user_search.html', context)
+    return render(request, 'active_template/user_search.html', context)
 
 def new_person(request):
     if request.method == "POST":
@@ -45,7 +45,7 @@ def new_person(request):
                                                         'success': "User added successfully."})
     else:
         form = CreateUser()
-    return render(request, 'new_person.html', {'form': form})
+    return render(request, 'active_template/new_person.html', {'form': form})
 
 def edit_user(request, pk):
     user = get_object_or_404(Person, pk=pk)
@@ -56,12 +56,12 @@ def edit_user(request, pk):
             return redirect('userinfo', pk=user.pk)
     else:
         form = CreateUser(instance=user)
-    return render(request, 'edit_user.html', {'form': form})
+    return render(request, 'active_template/edit_user.html', {'form': form})
 
 def user_info(request, pk):
     person = get_object_or_404(Person, pk=pk)
     book = Book.objects.filter(holder=pk)
-    return render(request, 'user-info.html', {'user': person, 'books': book})
+    return render(request, 'active_template/user-info.html', {'user': person, 'books': book})
 
 def delete_user(request, pk):
     user = Person.objects.get(pk=pk)

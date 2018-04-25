@@ -1,17 +1,17 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'active_template/base.html' %} {% load static %} {% block content %}
     <div id="checkin-options">
       <a class="checkin-type" href="{% url 'checkin' %}">Single Book</a>
       <a id="type" class="checkin-type">Individual</a>
     </div>
     <div id="CRUD">
       <div id="CRUD-search">
-        <form method="GET" action="">
+        <form method="GET" action=""> <!--search box for user to checkin books for-->
           <input id="search-field" type="text" name="q" placeholder="Search Users With Books Out" value="{{request.GET.q}}"/>
           <input id="submit" type="submit" value="Search" />
         </form>
       </div>
-      <div id="CRUD-body">{% for user in users %}
-        <a style="width: 320px;" href="{% url 'checkin-user' pk=user.pk %}">
+      <div id="CRUD-body">{% for user in users %} <!--loop to display all users with books out only-->
+        <a style="width: 320px;" href="{% url 'checkin-user' pk=user.pk %}"> <!--links to page with books out to user-->
           <div class="user-list">
             <div class="icon"><i class="fas fa-user-circle"></i></div>
             <div class="user-basic-info">{% if user.status == "Staff" %}
@@ -24,8 +24,9 @@
       </div>
 
       <div class="space"></div>
-      <div style="text-align: center;" class="pagination">
+      <div style="text-align: center;" class="pagination"><!--shows page of pages and next/previous if available-->
         <span class="page-links">{% if users.has_previous %}
+          <!--passes page # and if available, search term-->
           <a style="color:black" href="?{{page_var}}={{users.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Previous</a>{% endif %}
           <span class="Current">
             | Page {{users.number}} of {{users.paginator.num_pages}} |
@@ -33,6 +34,5 @@
         </span>
       </div>
       <div class="space"></div>
-
     </div>
 {% endblock content %}

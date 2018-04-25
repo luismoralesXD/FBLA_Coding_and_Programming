@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^checkout/(?P<pk>\d+)/$', CheckoutViews.checkout_to_user, name="checkout-user"),
     url(r'^delete-book/(?P<pk>\d+)/$', BookViews.delete_book, name="delete-book"),
     url(r'^delete-person/(?P<pk>\d+)/$', UserViews.delete_user, name="delete-user"),
+    url(r'^help/$', DBViews.help, name="help-page"),
     url(r'^user/$', UserViews.user_search, name="users"),
     url(r'^user/create/$', UserViews.new_person, name="newperson"),
     url(r'^user/(?P<pk>\d+)/$', UserViews.user_info, name="userinfo"),

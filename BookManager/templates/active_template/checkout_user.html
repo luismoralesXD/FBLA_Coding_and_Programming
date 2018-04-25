@@ -1,0 +1,51 @@
+{% extends 'active_template/base.html' %} {% load static %} {% block content %}
+<div class="space">
+</div>
+<div id="CRUD">
+    <div id="CRUD-search">
+        <form method="GET" action="">
+            <!--search box for available books for checkout-->
+            <!--displays name and books checked out to user-->
+            <h3>Check out to {{user.full_name}}(ID: {{user.id_number}}){% if user.status == "Staff" %}(Staff){%endif%}</h3>
+            <h4>{{user.books_out}} of {{user.books_allowed}} Books Checked Out</h4>
+            <div class="space"></div>{% if user.books_allowed > user.books_out %}
+            <!--if max books not reached, allow for search-->
+            <input id="search-field" type="text" name="q" placeholder="Search Books" value="{{request.GET.q}}" />
+            <input id="submit" type="submit" value="Search" />{% else %}
+            <!--otherwise show max is reached-->
+            <h2>Max amount of books allowed reached</h2>{% endif %}
+        </form>
+    </div>{% if user.books_allowed > user.books_out %}
+    <!--if user can checkout books-->
+    <div id="CRUD-body">{% for book in books %}
+        <!--show books not out-->
+        <a>
+            <div class="book-cards">
+                <div class="color-holder" style="background-color: rgb({{book.r}},{{book.g}},{{book.b}})">
+                </div>
+                <div class="info">
+                    <h4>{{book.title}}</h4>
+                    <h5>{{book.author}}</h5>
+                    <h5>ID: {{book.call_id}}</h5>
+                    <form method="POST" action="">{% csrf_token %}
+                        <!--form to checkout book to user-->
+                        <input class="hidden-id" name="book_pk" type="text" value="{{book.pk}}">
+                        <input onclick="return confirm('Checkout {{book.title}} to {{user.full_name}}?')" type="submit" value="Checkout" class="checkin">
+                    </form>
+                </div>
+            </div>
+        </a>{% endfor %}
+    </div>
+    <div class="space"></div>
+    <div style="text-align: center;" class="pagination">
+        <!--used to navigate through pages-->
+        <span class="page-links">{% if list.has_previous %}
+          <a style="color:black" href="?{{page_var}}={{books.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Previous</a>{% endif %}
+        <span class="Current">
+          | Page {{books.number}} of {{books.paginator.num_pages}} |
+        </span> {% if books.has_next %}<a style="color:rgb(0, 0, 0)" href="?{{page_var}}={{books.next_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Next</a>{% endif %}
+        </span>
+    </div>{% endif %}
+    <div class="space"></div>
+</div>
+{% endblock content %}

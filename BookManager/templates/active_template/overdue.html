@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'active_template/base.html' %} {% load static %} {% block content %}
 <div style="height:35px;padding:10px 10px 10px 0px;">
     <button style="background-color: #262846;color: white;width: 70px;height: 34px;border:none;box-shadow:none;" onclick="window.print()">Print</button>
 </div>
@@ -9,19 +9,19 @@
             <th>Id</th>
             <th>Book Out</th>
             <th>Due Date</th>
+            <th>Price</th>
         </tr>
-        {% for item in books_out %} {% if item.due_date > today %}
-        <tr></tr>
+        {% for item in overdue %} {% if item.due_date < today %}
         <tr>
-            <td>{{item.holder.first_name}} {{item.holder.last_name}} {% if item.holder.status == "Staff" %}(Staff){% endif %}</td>
+            <td>{{item.holder.first_name}} {{item.holder.last_name}}</td>
             <td>{{item.holder.id_number}}</td>
             <td>{{item.title}}</td>
             <td>
                 {% with date=item.due_date|slugify %} {{date|slice:"4:6"}}/{{date|slice:"6:8"}}/{{date|slice:":4"}} {% endwith %}
             </td>
-        </tr>
-        <tr></tr>
-        {% endif %} {% endfor %}
+            <td>{{item.price}}</td>
+        </tr>{% endif %}
+        {% endfor %}
     </table>
 </div>
 {% endblock content %}

@@ -10,3 +10,4 @@ dist/
 build/
 BookManager/.vscode/settings.json
 BookManager/BookManager.spec
+*.log

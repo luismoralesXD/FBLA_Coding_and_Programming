@@ -1,29 +1,29 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'active_template/base.html' %} {% load static %} {% block content %}
 <div class="space">
 </div>
-<div class="book-card" style="border-radius: 15px;">
-    <div class="basic-info">
+<div class="book-card" style="border-radius: 15px;"> <!-- contains everything -->
+    <div class="basic-info"> <!--holds the title and the div with the rgb value-->
         <div class="random-color" style="background-color: rgb({{book.r}},{{book.g}},{{book.b}});border-radius:5px;">
         </div>
         <div class="book-title">
-            <p>{{book.title}}</p>
+            <p>{{book.title}}</p>  <!--uses the context passed from views, book, to get the title-->
         </div>
     </div>
     <div class="detailed-info">
         <ul>
             <li>Author: {{book.author}}</li>
             <li>Year Released: {{book.year}}</li>
-            <li>Cost: {{book.price}}</li>{% if book.available %}
-            <li>Call ID: {{book.call_id}}</li>
+            <li>Cost: {{book.price}}</li>
+            <li>Call ID: {{book.call_id}}</li>{% if book.available %} <!--if book is available, display this-->
             <li>Available: Yes</li>
             <li>Checked out to: N/A</li>
             <div class="options" style="position: relative;text-align: center;height: 0px;">
                 <a class="delete" href="{% url 'delete-book' pk=book.pk %}" onclick="return confirm('Are you sure you want to delete this book?')"><i class="fas fa-trash-alt" style="color: black;width: 30px;display: inline-block;"></i></a>
                 <a class="delete edit" href="{% url 'editbook' pk=book.pk %}" onclick="return confirm('Are you sure you want to perform an update for this book?')" ><i class="far fa-edit" style="color: black;width: 30px;display: inline-block;margin-left: 150px;"></i>
-            </div>{% else %}
+            </div>{% else %} <!--otherwise if it is not available, display this-->
             <li>Available: No</li>
             <li>Checked out to: {{book.holder.first_name}} {{book.holder.last_name}}</li>
-            <div class="options" style="position: relative;text-align: center;height: 10px;">
+            <div class="options" style="position: relative;text-align: center;height: 10px;">  <!--will not include option to delete if it is out-->
                 <a style="margin:auto;" class="delete edit" href="{% url 'editbook' pk=book.pk %}" onclick="return confirm('Are you sure you want to perform an update for this book?')" ><i class="far fa-edit" style="color: black;width: 30px;display: inline-block;"></i>
             </div>
             <div class="space"></div><div class="space"></div>{% endif %}

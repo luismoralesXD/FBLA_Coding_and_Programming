@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'active_template/base.html' %} {% load static %} {% block content %}
 <div class="space">
 </div>
 {% if success %}
@@ -7,7 +7,7 @@
 <div class="form">
     <form method="POST" class="Screen">{% csrf_token %}
         <div class="title">
-            <h2 style="margin: auto">New Person</h2>
+            <h2 style="margin: auto">Add New Person</h2>
         </div>
         <div class="bookForm">
             {{ form.as_p }}

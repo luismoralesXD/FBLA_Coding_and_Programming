@@ -1,15 +1,16 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'active_template/base.html' %} {% load static %} {% block content %}
             <div class="space">
             </div>
             <div id="CRUD">
                 <div id="CRUD-search">
-                    <form method="GET" action="">
+                    <form method="GET" action=""> <!--form for search-->
                         <input id="search-field" type="text" name="q" placeholder="Search Books" value="{{request.GET.q}}" />
+                        <!--search term will remain in the box for user convenience-->
                         <input id="submit" type="submit" value="Search" />
                     </form>
                 </div>
-                <div id="CRUD-body">{% for book in list %}
-                    <a href="{% url 'bookinfo' pk=book.pk %}">
+                <div id="CRUD-body">{% for book in list %} <!--loop to go through every book that fits filter-->
+                    <a href="{% url 'bookinfo' pk=book.pk %}"> <!--link to the books info page-->
                         <div class="book-cards">
                             <div class="color-holder" style="background-color: rgb({{book.r}},{{book.g}},{{book.b}})">
                             </div>
@@ -21,7 +22,7 @@
                     </a>{% endfor %}
                 </div>
                 <div class="space"></div>
-                <div style="text-align: center;" class="pagination">
+                <div style="text-align: center;" class="pagination"> <!--displays page number and previous/next options if available-->
                     <span class="page-links">{% if list.has_previous %}
                         <a style="color:black" href="?{{page_var}}={{list.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Previous</a>{% endif %}
                         <span class="Current">

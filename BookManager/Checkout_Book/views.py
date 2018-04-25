@@ -1,8 +1,6 @@
 from django.shortcuts import render
 from Database.models import Book, Person
-from Database.forms import Createbook, CreateUser
-from datetime import date
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 
@@ -32,7 +30,7 @@ def checkout_book(request):
         "list": queryset,
         "page_var": page_var
     }
-    return render(request, 'checkout.html', context)
+    return render(request, 'active_template/checkout.html', context)
 
 def checkout_to_user(request, pk):
     user = Person.objects.get(pk=pk)
@@ -52,7 +50,7 @@ def checkout_to_user(request, pk):
         queryset = paginator.page(page)
     except PageNotAnInteger:
         queryset = paginator.page(1)
-    
+
     if checkout:
         book_chosen = Book.objects.get(pk=checkout)
         user.books_out = user.books_out + 1
@@ -64,4 +62,4 @@ def checkout_to_user(request, pk):
         book_chosen.save()
         return redirect('checkout-user', pk=pk)
 
-    return render(request, 'checkout_final.html',{'user': user, 'books': queryset})
+    return render(request, 'active_template/checkout_user.html',{'user': user, 'books': queryset})

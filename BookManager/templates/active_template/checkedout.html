@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
-<div style="height:35px;padding:10px 10px 10px 0px;">
+{% extends 'active_template/base.html' %} {% load static %} {% block content %}
+<div style="height:35px;padding:10px 10px 10px 0px;"> <!--print option-->
     <button style="background-color: #262846;color: white;width: 70px;height: 34px;border:none;box-shadow:none;" onclick="window.print()">Print</button>
 </div>
 <div class="book-card">
@@ -8,16 +8,20 @@
             <th>Name</th>
             <th>Id</th>
             <th>Book Out</th>
+            <th>Due Date</th>
         </tr>
-        {% for item in due %}
+        {% for item in books_out %} {% if item.due_date > today %} <!--loops to get books that are not late but checked out-->
         <tr></tr>
         <tr>
             <td>{{item.holder.first_name}} {{item.holder.last_name}} {% if item.holder.status == "Staff" %}(Staff){% endif %}</td>
             <td>{{item.holder.id_number}}</td>
             <td>{{item.title}}</td>
+            <td>
+                {% with date=item.due_date|slugify %} {{date|slice:"4:6"}}/{{date|slice:"6:8"}}/{{date|slice:":4"}} {% endwith %}
+            </td>
         </tr>
         <tr></tr>
-        {% endfor %}
+        {% endif %} {% endfor %}
     </table>
 </div>
 {% endblock content %}

@@ -30,8 +30,8 @@ def book_search(request):
         'BookSearch': 'active',
         "list": queryset,
         "page_var": page_var,
-    }
-    return render(request, 'book_search.html', context)
+    }  # pass the data to be used
+    return render(request, 'active_template/book_search.html', context)
 
 def create_book(request):
     if request.method == "POST":  # if form is being submitted..
@@ -42,11 +42,11 @@ def create_book(request):
             return render(request, 'register_book.html', {'form': form, 'success': "Book created successfully."})
     else:  # if accessing page to add book..
         form = Createbook()  # sends empty form
-    return render(request, 'register_book.html', {'form': form})
+    return render(request, 'active_template/create_book.html', {'form': form})
 
 def book_info(request, pk):
     book = get_object_or_404(Book, pk=pk)
-    return render(request, 'book-info.html', {'book': book})
+    return render(request, 'active_template/book-info.html', {'book': book})
 
 def edit_book(request, pk):
     book = get_object_or_404(Book, pk=pk)
@@ -57,7 +57,7 @@ def edit_book(request, pk):
             return redirect('bookinfo', pk=book.pk)  # take user back to book info page
     else:  # if user is going to update book
         form = Createbook(instance=book)  # fill in form with already saved info
-    return render(request, 'edit_book.html', {'form': form})
+    return render(request, 'active_template/edit_book.html', {'form': form})
 
 def delete_book(request, pk):
     book = Book.objects.get(pk=pk)

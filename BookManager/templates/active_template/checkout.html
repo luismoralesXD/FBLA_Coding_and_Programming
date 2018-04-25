@@ -1,14 +1,14 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'active_template/base.html' %} {% load static %} {% block content %}
       <div class="space"></div>
       <div id="CRUD">
         <div id="CRUD-search">
-          <form method="GET" action="">
+          <form method="GET" action=""> <!--search for user to checkout books to-->
             <input id="search-field" type="text" name="q" placeholder="Search Users" value="{{request.GET.q}}"/>
             <input id="submit" type="submit" value="Search" />
           </form>
         </div>
-        <div id="CRUD-body">{% for user in list %}
-          <a style="width: 320px;" href="{% url 'checkout-user' pk=user.pk %}">
+        <div id="CRUD-body">{% for user in list %} <!--loop to display users-->
+          <a style="width: 320px;" href="{% url 'checkout-user' pk=user.pk %}"> <!--checkout page for user-->
             <div class="user-list">
               <div class="icon"><i class="fas fa-user-circle"></i></div>
               <div class="user-basic-info">{% if user.status == "Staff" %}
@@ -21,8 +21,9 @@
         </div>
   
         <div class="space"></div>
-        <div style="text-align: center;" class="pagination">
+        <div style="text-align: center;" class="pagination"><!--shows page# of pages# and next/previous if available-->
           <span class="page-links">{% if list.has_previous %}
+            <!--passes search term to next page with page number-->
             <a style="color:black" href="?{{page_var}}={{list.previous_page_number}}{% if request.GET.q %}&q={{request.GET.q}}{% endif %}">Previous</a>{% endif %}
             <span class="Current">
               | Page {{list.number}} of {{list.paginator.num_pages}} |

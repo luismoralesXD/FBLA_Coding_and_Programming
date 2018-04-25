@@ -7,14 +7,15 @@
     <meta charset="UTF-8" />
 
     <!--  Styles  -->
-    <link rel="stylesheet" href="{% static 'css/book-info.css' %}">
-    <link rel="stylesheet" href="{% static 'css/register_book.css' %}">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'css/CRUD.css' %}">
-    <link rel="stylesheet" href="{% static 'css/assets/webfonts/fontawesome-all.css' %}">
+    <link rel="stylesheet" href="{% static 'css/default_css/book-info.css' %}">
+    <link rel="stylesheet" href="{% static 'css/default_css/register_book.css' %}">
+    <link rel="stylesheet" href="{% static 'css/default_css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/default_css/CRUD.css' %}">
+    <link rel="stylesheet" href="{% static 'css/default_css/assets/webfonts/fontawesome-all.css' %}">
 </head>
 
 <body>
+    <!-- checks to see if currently on that tab, being on the tab will change its color and make it a div instead of link -->
     <div id="side">{% if not Home %}
         <div class="menu-item">
             <a href="{% url 'home' %}">{% else %}
@@ -70,11 +71,23 @@
                 <div class="space">
                 </div>{% if not Checkin %}
             </a>{% endif %}
+        </div>{% if not Help %}
+        <div class="menu-item">
+            <a href="{% url 'help-page' %}">{% else %}
+        <div class="active">{% endif %}
+                <div class="space">
+                </div>
+                <i class="far fa-question-circle"></i>
+                <p>Help</p>
+                <div class="space">
+                </div>{% if not Help %}
+            </a>{% endif %}
         </div>
     </div>
 
     <div id="content">
         {% block content %} {% endblock content %}
+        <!-- used by other templates to simplify html files -->
     </div>
     <!-- Scripts -->
 </body>
