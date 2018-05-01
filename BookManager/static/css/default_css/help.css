@@ -1,0 +1,19 @@
+#help {
+  margin: auto;
+  border-radius: 10px;
+  width: 750px;
+  height: 500px;
+  background-color: white;
+  padding: 5px;
+}
+.questions {
+  border: 1px solid #ececec;
+  width: 700px;
+  margin: auto;
+  padding: 10px;
+  margin-bottom: 15px;
+}
+#help h1 {
+  text-align: center;
+  padding: 20px;
+}

@@ -11,7 +11,8 @@
         </tr>
         {% for item in due %}
         <!--loops through books with due date that of today-->
-        <tr>
+        <tr class="{{ forloop.counter|divisibleby:2 }}"></tr>
+        <tr class="{{ forloop.counter|divisibleby:2 }}">
             <!--display user's full name-->
             <td>{{item.holder.first_name}} {{item.holder.last_name}} {% if item.holder.status == "Staff" %}(Staff){% endif %}</td>
             <!--display the user's ID-->
@@ -19,6 +20,7 @@
             <!--display the book title-->
             <td>{{item.title}}</td>
         </tr>
+        <tr class="{{ forloop.counter|divisibleby:2 }}"></tr>
         {% endfor %}
     </table>
 </div>

@@ -39,7 +39,7 @@ def create_book(request):
         if form.is_valid():  # checks if the form is valid, all necessary fields filled appropriately
             book = form.save()  # saves the form
             form = Createbook()  # sets a new form to form var and send back to empty page
-            return render(request, 'register_book.html', {'form': form, 'success': "Book created successfully."})
+            return render(request, 'active_template/create_book.html', {'form': form, 'success': "Book created successfully."})
     else:  # if accessing page to add book..
         form = Createbook()  # sends empty form
     return render(request, 'active_template/create_book.html', {'form': form})
@@ -62,4 +62,4 @@ def edit_book(request, pk):
 def delete_book(request, pk):
     book = Book.objects.get(pk=pk)
     book.delete()
-    return redirect('home')
+    return redirect('booksearch')

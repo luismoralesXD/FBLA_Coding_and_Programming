@@ -41,7 +41,7 @@ def new_person(request):
         if form.is_valid():
             person = form.save()
             form = CreateUser()
-            return render(request, 'register_book.html', {'form': form,
+            return render(request, 'active_template/new_person.html', {'form': form,
                                                         'success': "User added successfully."})
     else:
         form = CreateUser()
@@ -66,4 +66,4 @@ def user_info(request, pk):
 def delete_user(request, pk):
     user = Person.objects.get(pk=pk)
     user.delete()
-    return redirect('home')
+    return redirect('users')

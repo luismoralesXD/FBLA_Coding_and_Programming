@@ -18,7 +18,7 @@
                         <li>There are {{out}} books checked out.</li>
                     </a>
                     {% else %}
-                    <li>There are {{today}} books due today.</li>
+                    <li>There are {{today}} books checked out.</li>
                     {% endif %} {% if late > 0 %}
                     <a href="{% url 'overdue' %}" style="text-align: left">
                         <li>There are {{late}} books overdue.</li>
