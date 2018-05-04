@@ -12,7 +12,6 @@
             <th>Price</th>
         </tr>
         {% for item in overdue %} {% if item.due_date < today %}
-        <tr class="{{ forloop.counter|divisibleby:2 }}"></tr>
         <tr class="{{ forloop.counter|divisibleby:2 }}">
             <td>{{item.holder.first_name}} {{item.holder.last_name}}</td>
             <td>{{item.holder.id_number}}</td>
@@ -22,7 +21,7 @@
             </td>
             <td>{{item.price}}</td>
         </tr>
-        <tr class="{{ forloop.counter|divisibleby:2 }}"></tr>{% endif %}
+        <tr class="{{ forloop.counter|divisibleby:2 }}" style="height: 5px"></tr>{% endif %}
         {% endfor %}
     </table>
 </div>

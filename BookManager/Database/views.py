@@ -35,7 +35,12 @@ def checkedout_books(request):
     today = date.today()
     todays_date = int(str(today.year)+str(today.month).zfill(2)+str(today.day).zfill(2))
     books_out = Book.objects.filter(available=False).order_by('due_date')
-    return render(request, 'active_template/checkedout.html', {'books_out': books_out, 'today': todays_date})
+
+    context = {
+        'books_out': books_out,
+        'today': todays_date
+    }
+    return render(request, 'active_template/checkedout.html', context)
 
 def due_today(request):
     today = date.today()
@@ -47,7 +52,12 @@ def overdue(request):
     today = date.today()
     todays_date = int(str(today.year) + str(today.month).zfill(2) + str(today.day).zfill(2))
     overdue = Book.objects.filter(available=False).order_by('-due_date')
-    return render(request, 'active_template/overdue.html', {'overdue': overdue, 'today': todays_date})
+
+    context = {
+        'overdue': overdue,
+        'today': todays_date
+    }
+    return render(request, 'active_template/overdue.html', context)
 
 def help(request):
     return render(request, 'active_template/help.html', {'Help': 'active'})

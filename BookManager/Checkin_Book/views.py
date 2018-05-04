@@ -37,7 +37,12 @@ def checkin_books_individually(request):
         book.save()
         return redirect('checkin')
 
-    return render(request, 'active_template/checkin.html', {'books_out': queryset, 'page_var':page_var, 'Checkin': 'active'})
+    context = {
+        'books_out': queryset,
+        'page_var': page_var,
+        'Checkin': 'active'
+    }
+    return render(request, 'active_template/checkin.html', context)
 
 def checkin_by_user(request):
     users = Person.objects.exclude(books_out=0)
@@ -58,7 +63,12 @@ def checkin_by_user(request):
     except PageNotAnInteger:
         queryset = paginator.page(1)
 
-    return render(request, 'active_template/checkinThroughUser.html', {'users': queryset, 'page_var': page_var, 'Checkin': 'active'})
+    context = {
+        'users': queryset,
+        'page_var': page_var,
+        'Checkin': 'active'
+    }
+    return render(request, 'active_template/checkinThroughUser.html', context)
 
 def checkin_user_books(request, pk):
     user = get_object_or_404(Person, pk=pk)
