@@ -1,5 +1,5 @@
 # Coding_and_programming_project
-To download the project you must go to the `BookManager` folder where you will find two `.zip` files. One with `(empty)` and another one with `(populated)`. They are both the same except for the database files contained within them. The `(empty)` has a database that is completely empty and can be used from scratch. The `(populated)` one contains the database used during development that contains people and books. This one is the one to be judged.
+To download the project you must go to the `Releases` where you will find the release labeled `Alpha release 2.0`
 To Download the program, 
 
 1. You must download the `.zip` file and wait to be complete
